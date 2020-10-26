@@ -9,6 +9,16 @@ app.use(cookieParser());
 
 app.set('view engine', 'pug');
 
+app.use((req, res, next) => {
+    console.log("Hello");
+    next();
+});
+
+app.use((req, res, next) => {
+    console.log("world");
+    next();
+});
+
 app.get('/', (req, res) => {
     const name = req.cookies.username;
     if (name) {
@@ -21,9 +31,6 @@ app.get('/', (req, res) => {
 app.get('/cards', (req, res) => {
     res.render('card', { prompt: "Who is buried in Grant's tomb?" });
 });
-
-// /sandbox
-// First Name | Last Name
 
 app.get('/hello', (req, res) => {
     const name = req.cookies.username;
